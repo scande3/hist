@@ -1,0 +1,53 @@
+$('#hist-gem-modal').html("<%= j(render partial: 'hist/modal_popup') %>");
+$('#hist-gem-modal').modal('show');
+
+<% if @aceMode == :json %>
+
+$(function() {
+    var mode = "ace/mode/json";
+
+    var left_content = JSON.stringify(<%= @diff_escaped[:left].html_safe %>, null, '\t');
+    var right_content = JSON.stringify(<%= @diff_escaped[:right].html_safe %>, null, '\t');
+
+    histInstantiateHistory(mode, "<%=@height%>", left_content, right_content);
+});
+
+<% elsif @aceMode == :yaml %>
+
+$(function() {
+    var mode = "ace/mode/yaml";
+    var left_content = `<%= YAML.dump(@diff[:left]) %>`;
+    var right_content = `<%= YAML.dump(@diff[:right]) %>`;
+
+    histInstantiateHistory(mode, "<%=@height%>", left_content, right_content);
+});
+
+<% elsif @aceMode == :text %>
+
+$(function() {
+    var mode = "ace/mode/text";
+    var left_content = `<%= @diff[:left].to_s %>`;
+    var right_content = `<%= @diff[:right].to_s %>`;
+
+    histInstantiateHistory(mode, "<%=@height%>", left_content, right_content);
+
+// ActiveSupport::JSON.decode(@diff[:version])["doc_files"].first["ocr"].to_s
+// ActiveSupport::JSON.decode(@diff[:current])["doc_files"].first["ocr"].to_s,
+});
+
+<% elsif @aceMode == :html %>
+
+$(function() {
+    var mode = "ace/mode/html";
+    var left_content = `<%= @diff[:left].html_safe %>`;
+    var right_content = `<%= @diff[:right].html_safe %>`;
+
+    histInstantiateHistory(mode, "<%=@height%>", left_content, right_content);
+
+// ActiveSupport::JSON.decode(@diff[:version])["doc_files"].first["ocr"].to_s
+// ActiveSupport::JSON.decode(@diff[:current])["doc_files"].first["ocr"].to_s,
+});
+
+<% end %>
+
+

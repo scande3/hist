@@ -1,0 +1,20 @@
+#hist_modal_container {
+  width: 98%;
+  margin: 10px auto;
+
+  div.modal-header {
+    padding-bottom: 2px;
+
+    div.hist-title-left {
+      float: left;
+      width: 50%;
+      padding-left:40px;
+
+
+    }
+    div.hist-title-right {
+      float: left;
+      padding-left:90px;
+    }
+  }
+}
