@@ -1,6 +1,6 @@
 # Hist
 This gem is designed to allow one to record version history of an object. Additionally, it has support to store
-"pending" objects.
+"pending" objects. Videos, sample implementation project, and gifs will be coming over the next week.
 
 ## Installation
 Add this line to your application's Gemfile:
