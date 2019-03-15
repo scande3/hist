@@ -35,12 +35,13 @@ rails g hist:install
 2. Then do one of the following two methods to records your versions:
 
     1a. Add the following to your model to save anytime you call this object's save method:
-       ```ruby
-         around_save :hist_around_save
-       ```
+      ```ruby
+        around_save :hist_around_save
+      ```
 
     2b. Manually call the following on cases you want to create a version: `obj.hist_save_actions`.
     An example of this might be the follow:
+
       ```ruby
         around_save :my_custom_save
 
@@ -87,14 +88,19 @@ To delete a pending object, one would do:
 
 #### Views (comparison feature)
 
-1. Inside of your layout or just on a view page, add the following:
+1. Mount the Hist engine in your routes.rb:
+   ```ruby
+     mount Hist::Engine => '/hist'
+   ```
+
+2. Inside of your layout or just on a view page, add the following:
    ```ruby
      <%= render partial: 'partials/hist/modal.html.erb' %>
    ```
 
-2. Have Bootstrap installed in your application with the popover javascript available.
+3. Have Bootstrap installed in your application with the popover javascript available.
 
-3. Have the Ace Editor installed which is essentially:
+4. Have the Ace Editor installed which is essentially:
     Inside of your Gemfile:
     ```ruby
       gem 'ace-rails-ap'
@@ -108,7 +114,7 @@ To delete a pending object, one would do:
       //= require ace/mode-text
     ```
 
-4. For the diff views, one needs to simply use a link on their page in the format (see API for more examples):
+5. For the diff views, one needs to simply use a link on their page in the format (see API for more examples):
    ```ruby
      # For Versions
      <%= link_to "Diff Content", hist.diff_versions_path(left_id: ver_id, right_id: 'current'), remote: true %></li>
